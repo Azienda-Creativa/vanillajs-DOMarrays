@@ -25,4 +25,22 @@ async function getRandomUser() {
 
 function addData(obj) {
   data.push(obj)
+  updateDOM()
 }
+
+function updateDOM(providedData = data) {
+  //clear main div
+  main.innerHTML = "<h2><strong>Person</strong> Wealth</h2>"
+  providedData.forEach((item) => {
+    const element = document.createElement("div")
+    element.classList.add("person")
+    element.innerHTML = `<h4><strong/>${item.name}</strong> ${formatCurrency(item.money)}</h4>`
+    main.appendChild(element)
+  })
+}
+
+function formatCurrency(number) {
+  return "$" + number.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,")
+}
+
+const addUser = addUserBtn.addEventListener("click", getRandomUser)
