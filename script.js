@@ -49,9 +49,16 @@ function showMillionaires() {
   updateDOM()
 }
 
+function sumWealth() {
+  const wealth = data.reduce((acc, user) => acc + user.money, 0)
+
+  const wealthEl = document.createElement("div")
+  wealthEl.innerHTML = `<h3> Total Wealth: <strong>${formatCurrency(wealth)}</strong></h3>`
+  main.appendChild(wealthEl)
+}
+
 // DOM
 function updateDOM(providedData = data) {
-  //clear main div
   main.innerHTML = "<h2><strong>Person</strong> Wealth</h2>"
   providedData.forEach((item) => {
     const element = document.createElement("div")
@@ -70,3 +77,4 @@ const addUser = addUserBtn.addEventListener("click", getRandomUser)
 const doubleWealth = doubleBtn.addEventListener("click", doubleMoney)
 const sortRichest = sortBtn.addEventListener("click", sortByRichest)
 const filterMillionaires = showMillBtn.addEventListener("click", showMillionaires)
+const totalWealth = clcWealthBtn.addEventListener("click", sumWealth)
